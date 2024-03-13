@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('quacks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('content');
-            $table->dateTime('created_at');
+            $table->timestamps();
         });
         /*
         Le problème dans votre migration est que vous avez spécifié la colonne "created_at" deux fois.
